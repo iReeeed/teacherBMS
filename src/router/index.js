@@ -129,7 +129,7 @@ export const constantRoutes = [{
 export const asyncRoutes = [{
   path: '/permission',
   component: Layout,
-  redirect: '/permission/addClass',
+  redirect: '/permission/add-class',
   alwaysShow: true, // will always show the root menu
   name: 'Permission',
   meta: {
@@ -138,9 +138,9 @@ export const asyncRoutes = [{
     roles: ['admin', 'editor'] // you can set roles in root nav
   },
   children: [{
-    path: 'addClass',
+    path: 'add-class',
     component: () =>
-      import ('@/views/permission/addClass'),
+      import ('@/views/permission/add-class'),
     name: 'PagePermission',
     meta: {
       title: '课程添加',
@@ -189,7 +189,7 @@ tableRouter,
 {
   path: '/example',
   component: Layout,
-  redirect: '/example/list',
+  redirect: '/example/scientific-research',
   name: 'Example',
   meta: {
     title: '科研项目管理',
@@ -198,19 +198,11 @@ tableRouter,
 
   },
   children: [{
-    path: 'create',
+    path: 'scientific-research',
     component: () =>
-      import ('@/views/example/create'),
+      import ('@/views/example/scientific-research'),
     name: 'CreateArticle',
-    meta: { title: '科研项目添加', icon: 'edit' }
-  },
-  {
-    path: 'edit/:id(\\d+)',
-    component: () =>
-      import ('@/views/example/edit'),
-    name: 'EditArticle',
-    meta: { title: 'Edit Article', noCache: true, activeMenu: '/example/list' },
-    hidden: true
+    meta: { title: '科研项目管理', icon: 'edit' }
   },
   {
     path: 'list',
@@ -223,39 +215,55 @@ tableRouter,
 },
 
 {
-  path: '/excel',
+  path: '/users',
   component: Layout,
-  redirect: '/excel/export-excel',
+  redirect: '/users/admin-manage',
   name: 'Excel',
   meta: {
     title: '用户管理',
     icon: 'excel'
   },
   children: [{
-    path: 'export-excel',
+    path: 'admin-manage',
     component: () =>
-      import ('@/views/excel/export-excel'),
+      import ('@/views/users/admin/admin-manage'),
     name: 'ExportExcel',
-    meta: { title: '用户添加' }
+    meta: { title: '管理员信息管理' }
+
   },
   {
-    path: 'export-selected-excel',
+    path: 'tea-manage',
+    // redirect: '/tea-manage/list',
+    name: 'ExportExcel',
+    meta: { title: '教师信息管理' },
     component: () =>
-      import ('@/views/excel/select-excel'),
-    name: 'SelectExcel',
-    meta: { title: '用户查询' }
+      import ('@/views/users/teacher/tea-list'),
+    children: [{
+      path: 'list',
+      component: () =>
+        import ('@/views/users/teacher/tea-list'),
+      meta: { title: '教师信息列表' }
+    },
+    {
+      path: 'add',
+      component: () =>
+        import ('@/views/users/teacher/tea-add'),
+      name: 'AddTeacher',
+      meta: { title: '教师信息添加' }
+    }
+    ]
   },
   {
-    path: 'export-merge-header',
+    path: 'stu-manage',
     component: () =>
-      import ('@/views/excel/merge-header'),
+      import ('@/views/users/student/stu-manage'),
     name: 'MergeHeader',
-    meta: { title: 'Merge Header' }
+    meta: { title: '学生信息管理' }
   },
   {
     path: 'upload-excel',
     component: () =>
-      import ('@/views/excel/upload-excel'),
+      import ('@/views/users/upload-excel'),
     name: 'UploadExcel',
     meta: { title: 'Upload Excel' }
   }
