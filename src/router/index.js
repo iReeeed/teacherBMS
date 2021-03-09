@@ -127,25 +127,43 @@ export const constantRoutes = [{
  * the routes that need to be dynamically loaded based on user roles
  */
 export const asyncRoutes = [{
-  path: '/permission',
+  path: '/class',
   component: Layout,
-  redirect: '/permission/add-class',
+  redirect: '/class/add/theory-class',
   alwaysShow: true, // will always show the root menu
-  name: 'Permission',
+  name: 'Class',
   meta: {
     title: '课程管理',
     icon: 'lock',
     roles: ['admin', 'editor'] // you can set roles in root nav
   },
   children: [{
-    path: 'add-class',
+    path: 'add',
     component: () =>
-      import ('@/views/permission/add-class'),
-    name: 'PagePermission',
+      import ('@/views/permission/index'),
+    name: 'AddClass',
+    redirect: '/class/add/theory-class',
     meta: {
       title: '课程添加',
       roles: ['admin'] // or you can only set roles in sub nav
-    }
+    },
+    children: [{
+      path: 'theory-class',
+      component: () =>
+        import ('@/views/permission/classes/add-theory'),
+      name: 'Theory',
+      meta: {
+        title: '添加理论课程'
+      }
+    }, {
+      path: 'exp-class',
+      component: () =>
+        import ('@/views/permission/classes/add-exp'),
+      name: 'experiment',
+      meta: {
+        title: '添加实验课程'
+      }
+    }]
   },
   {
     path: 'directive',
@@ -217,37 +235,30 @@ tableRouter,
 {
   path: '/users',
   component: Layout,
-  redirect: '/users/admin-manage',
-  name: 'Excel',
+  redirect: '/users/tea-manage/list',
+  name: 'Users',
   meta: {
     title: '用户管理',
     icon: 'excel'
   },
   children: [{
-    path: 'admin-manage',
-    component: () =>
-      import ('@/views/users/admin/admin-manage'),
-    name: 'ExportExcel',
-    meta: { title: '管理员信息管理' }
-
-  },
-  {
     path: 'tea-manage',
-    // redirect: '/tea-manage/list',
-    name: 'ExportExcel',
+    name: 'Teacher',
+    redirect: '/users/tea-manage/list',
     meta: { title: '教师信息管理' },
     component: () =>
-      import ('@/views/users/teacher/tea-list'),
+      import ('@/views/users/teacher/index'),
     children: [{
       path: 'list',
       component: () =>
-        import ('@/views/users/teacher/tea-list'),
+        import ('@/views/users/teacher/components/tea-list'),
+      name: 'TeacherList',
       meta: { title: '教师信息列表' }
     },
     {
       path: 'add',
       component: () =>
-        import ('@/views/users/teacher/tea-add'),
+        import ('@/views/users/teacher/components/tea-add'),
       name: 'AddTeacher',
       meta: { title: '教师信息添加' }
     }
@@ -257,8 +268,16 @@ tableRouter,
     path: 'stu-manage',
     component: () =>
       import ('@/views/users/student/stu-manage'),
-    name: 'MergeHeader',
+    name: 'Student',
     meta: { title: '学生信息管理' }
+  },
+  {
+    path: 'admin-manage',
+    component: () =>
+      import ('@/views/users/admin/admin-manage'),
+    name: 'Admin',
+    meta: { title: '管理员信息管理' }
+
   },
   {
     path: 'upload-excel',

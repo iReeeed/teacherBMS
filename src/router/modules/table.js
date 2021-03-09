@@ -3,42 +3,29 @@
 import Layout from '@/layout'
 
 const tableRouter = {
-  path: '/table',
+  path: '/workload',
   component: Layout,
-  redirect: '/table/complex-table',
-  name: 'Table',
+  redirect: '/workload/list',
+  name: 'Workload',
   meta: {
     title: '教师工作量管理',
     icon: 'table'
   },
   children: [{
-    path: 'dynamic-table',
+    path: 'list',
     component: () =>
-      import ('@/views/table/dynamic-table/index'),
-    name: 'DynamicTable',
-    meta: { title: '教师工作量添加' }
+      import ('@/views/workload/list'),
+    name: 'WorkloadList',
+    meta: { title: '教师工作量列表' }
   },
   {
     path: 'drag-table',
     component: () =>
-      import ('@/views/table/drag-table'),
+      import ('@/views/workload/drag-table'),
     name: 'DragTable',
     meta: { title: '教师工作量查询' }
-  },
-  {
-    path: 'inline-edit-table',
-    component: () =>
-      import ('@/views/table/inline-edit-table'),
-    name: 'InlineEditTable',
-    meta: { title: 'Inline Edit' }
-  },
-  {
-    path: 'complex-table',
-    component: () =>
-      import ('@/views/table/complex-table'),
-    name: 'ComplexTable',
-    meta: { title: 'Complex Table' }
   }
+
   ]
 }
 export default tableRouter
