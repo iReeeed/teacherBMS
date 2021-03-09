@@ -84,29 +84,6 @@ export const constantRoutes = [{
     meta: { title: '首页', icon: 'dashboard', affix: true }
   }]
 },
-// {
-//     path: '/documentation',
-//     component: Layout,
-//     children: [{
-//         path: 'index',
-//         component: () =>
-//             import ('@/views/documentation/index'),
-//         name: 'Documentation',
-//         meta: { title: 'Documentation', icon: 'documentation', affix: true }
-//     }]
-// },
-// {
-//     path: '/guide',
-//     component: Layout,
-//     redirect: '/guide/index',
-//     children: [{
-//         path: 'index',
-//         component: () =>
-//             import ('@/views/guide/index'),
-//         name: 'Guide',
-//         meta: { title: 'Guide', icon: 'guide', noCache: true }
-//     }]
-// },
 {
   path: '/profile',
   component: Layout,
@@ -134,7 +111,7 @@ export const asyncRoutes = [{
   name: 'Class',
   meta: {
     title: '课程管理',
-    icon: 'lock',
+    icon: 'star',
     roles: ['admin', 'editor'] // you can set roles in root nav
   },
   children: [{
@@ -145,6 +122,7 @@ export const asyncRoutes = [{
     redirect: '/class/add/theory-class',
     meta: {
       title: '课程添加',
+      icon: 'link',
       roles: ['admin'] // or you can only set roles in sub nav
     },
     children: [{
@@ -153,7 +131,8 @@ export const asyncRoutes = [{
         import ('@/views/permission/classes/add-theory'),
       name: 'Theory',
       meta: {
-        title: '添加理论课程'
+        title: '添加理论课程',
+        icon: 'edit'
       }
     }, {
       path: 'exp-class',
@@ -161,7 +140,8 @@ export const asyncRoutes = [{
         import ('@/views/permission/classes/add-exp'),
       name: 'experiment',
       meta: {
-        title: '添加实验课程'
+        title: '添加实验课程',
+        icon: 'edit'
       }
     }]
   },
@@ -171,7 +151,8 @@ export const asyncRoutes = [{
       import ('@/views/permission/directive'),
     name: 'DirectivePermission',
     meta: {
-      title: '课程查询'
+      title: '课程查询',
+      icon: 'search'
       // if do not set roles, means: this page does not require permission
     }
   }
@@ -245,7 +226,7 @@ tableRouter,
     path: 'tea-manage',
     name: 'Teacher',
     redirect: '/users/tea-manage/list',
-    meta: { title: '教师信息管理' },
+    meta: { title: '教师信息管理', icon: 'lock' },
     component: () =>
       import ('@/views/users/teacher/index'),
     children: [{
@@ -253,30 +234,62 @@ tableRouter,
       component: () =>
         import ('@/views/users/teacher/components/tea-list'),
       name: 'TeacherList',
-      meta: { title: '教师信息列表' }
+      meta: { title: '教师信息列表', icon: 'list' }
     },
     {
       path: 'add',
       component: () =>
         import ('@/views/users/teacher/components/tea-add'),
       name: 'AddTeacher',
-      meta: { title: '教师信息添加' }
+      meta: { title: '教师信息添加', icon: 'edit' }
     }
     ]
   },
   {
     path: 'stu-manage',
     component: () =>
-      import ('@/views/users/student/stu-manage'),
+      import ('@/views/users/student/index'),
+    redirect: 'users/stu-manage/stu-list',
     name: 'Student',
-    meta: { title: '学生信息管理' }
+    meta: { title: '学生信息管理', icon: 'message' },
+    children: [{
+      path: 'stu-list',
+      component: () =>
+        import ('@/views/users/student/components/stu-list'),
+      name: 'TeacherList',
+      meta: { title: '学生信息列表', icon: 'list' }
+    },
+    {
+      path: 'stu-add',
+      component: () =>
+        import ('@/views/users/student/components/stu-add'),
+      name: 'AddTeacher',
+      meta: { title: '学生信息添加', icon: 'edit' }
+    }
+    ]
   },
   {
     path: 'admin-manage',
     component: () =>
-      import ('@/views/users/admin/admin-manage'),
+      import ('@/views/users/admin/index'),
     name: 'Admin',
-    meta: { title: '管理员信息管理' }
+    redirect: '/users/admin-manage/admin-list',
+    meta: { title: '管理员信息管理', icon: 'user' },
+    children: [{
+      path: 'admin-list',
+      component: () =>
+        import ('@/views/users/admin/components/admin-list'),
+      name: 'TeacherList',
+      meta: { title: '管理员信息列表', icon: 'list' }
+    },
+    {
+      path: 'admin-add',
+      component: () =>
+        import ('@/views/users/admin/components/admin-add'),
+      name: 'AddTeacher',
+      meta: { title: '管理员信息添加', icon: 'edit' }
+    }
+    ]
 
   },
   {
@@ -285,6 +298,7 @@ tableRouter,
       import ('@/views/users/upload-excel'),
     name: 'UploadExcel',
     meta: { title: 'Upload Excel' }
+
   }
   ]
 },

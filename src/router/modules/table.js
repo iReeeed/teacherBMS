@@ -16,14 +16,14 @@ const tableRouter = {
     component: () =>
       import ('@/views/workload/list'),
     name: 'WorkloadList',
-    meta: { title: '教师工作量列表' }
+    meta: { title: '教师工作量列表', icon: 'list' }
   },
   {
     path: 'drag-table',
     component: () =>
       import ('@/views/workload/drag-table'),
     name: 'DragTable',
-    meta: { title: '教师工作量查询' }
+    meta: { title: '教师工作量查询', icon: 'search' }
   }
 
   ]
